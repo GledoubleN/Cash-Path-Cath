@@ -1,7 +1,7 @@
 import { CashflowChart } from './components/CashflowChart';
 import { signedWon, won } from './domain/format';
 import type { OptimizationPlan, RiskLevel } from './domain/types';
-import { DEMO_EVENTS, useDoneureum, type DemoEvent } from './store';
+import { DEMO_EVENTS, useCath, type DemoEvent } from './store';
 
 const RISK_LABEL: Record<RiskLevel, string> = {
   LOW: '안전',
@@ -11,7 +11,7 @@ const RISK_LABEL: Record<RiskLevel, string> = {
 };
 
 export default function App() {
-  const { forecast, plan, planApproved, accounts, policy, recentTx, fireEvent, approvePlan, reset } = useDoneureum();
+  const { forecast, plan, planApproved, accounts, policy, recentTx, fireEvent, approvePlan, reset } = useCath();
   const totalAssets = accounts.reduce((s, a) => s + a.balance, 0);
   const safe = forecast.riskLevel === 'LOW';
 
@@ -19,7 +19,7 @@ export default function App() {
     <div className="app">
       <header className="topbar">
         <div>
-          <div className="brand">도느름 · DONEUREUM</div>
+          <div className="brand">Cath · Cash + Path</div>
           <div className="tagline">돈이 필요한 곳으로, 알아서 흐르도록.</div>
         </div>
         <span className={`badge ${safe ? 'ok' : 'warn'}`}>{RISK_LABEL[forecast.riskLevel]}</span>
@@ -49,7 +49,7 @@ export default function App() {
       {planApproved && (
         <section className="card resolved">
           <h2>✓ 위험이 해소되었습니다</h2>
-          <p className="muted">도느름이 자금을 재배치해 예상 최저잔액을 최소생활자금 위로 올렸어요.</p>
+          <p className="muted">Cath가 자금을 재배치해 예상 최저잔액을 최소생활자금 위로 올렸어요.</p>
           <div className="kv">
             <span>예상 최저잔액</span>
             <strong>{won(forecast.minimumExpectedBalance)}</strong>
@@ -121,7 +121,7 @@ function RiskBanner({ plan, minimumCash }: { plan: OptimizationPlan; minimumCash
 function OptimizationCard({ plan, onApprove }: { plan: OptimizationPlan; onApprove: () => void }) {
   return (
     <section className="card proposal">
-      <h2>도느름의 제안</h2>
+      <h2>Cath의 제안</h2>
       <ul className="rows">
         {plan.actions.map((a) => (
           <li key={a.id}>

@@ -1,4 +1,4 @@
-# 도느름 서비스 흐름도 (Service Flow)
+# Cath 서비스 흐름도 (Service Flow)
 
 기획서 §10(MSA), §12(Kafka Event), §15(Demo Flow) 기준.
 이 프론트엔드 데모는 아래 백엔드 흐름을 **클라이언트 순수 함수**(`src/domain/engine.ts`)로 재현한다.

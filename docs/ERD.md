@@ -1,4 +1,4 @@
-# 도느름 ERD
+# Cath ERD
 
 기획서 §11(Microservices)·§13(REST API) 기준의 논리 데이터 모델.
 MSA에서는 서비스별로 DB가 분리되지만(§18 PostgreSQL per service), 여기서는 전체 도메인을 한 장으로 본다.

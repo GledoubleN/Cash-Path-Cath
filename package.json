@@ -1,9 +1,9 @@
 {
-  "name": "doneureum",
+  "name": "cath",
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "도느름(DONEUREUM) — 미래 현금흐름 기반 개인 금융 자동화 데모 (프론트엔드)",
+  "description": "Cath (Cash + Path) — 미래 현금흐름 기반 개인 금융 자동화 데모 (프론트엔드)",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

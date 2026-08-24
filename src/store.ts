@@ -23,7 +23,7 @@ export const DEMO_EVENTS: DemoEvent[] = [
   { key: 'salary', label: '월급', emoji: '💰', category: 'SALARY', amount: 3_200_000 },
 ];
 
-export function useDoneureum() {
+export function useCath() {
   const [applied, setApplied] = useState<Transaction[]>([]);
   const [injection, setInjection] = useState(0);
   const [planApproved, setPlanApproved] = useState(false);
