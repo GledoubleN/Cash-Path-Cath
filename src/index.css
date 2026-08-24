@@ -170,6 +170,63 @@ button {
   font-size: 15px;
 }
 
+/* ── 온보딩 ── */
+.onboard {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.onboard-inner {
+  width: 100%;
+  max-width: 420px;
+}
+.onboard .brand {
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--brand);
+}
+.onboard h1 {
+  font-size: 26px;
+  line-height: 1.35;
+  margin: 20px 0 8px;
+}
+.onboard .muted {
+  font-size: 13px;
+  margin-bottom: 24px;
+}
+.opts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.opt {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 18px;
+  border-radius: 14px;
+  border: 1.5px solid var(--line);
+  background: var(--card);
+  font-size: 15px;
+  font-weight: 600;
+  text-align: left;
+}
+.opt.on {
+  border-color: var(--brand);
+  background: #f0f5ff;
+  color: var(--brand);
+}
+.opt .check {
+  font-weight: 800;
+}
+.primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 .chart {
   width: 100%;
   height: auto;

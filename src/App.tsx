@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { CashflowChart } from './components/CashflowChart';
+import { Onboarding, PRIORITIES } from './components/Onboarding';
 import { signedWon, won } from './domain/format';
 import type { OptimizationPlan, RiskLevel } from './domain/types';
 import { DEMO_EVENTS, useCath, type DemoEvent } from './store';
@@ -10,7 +12,30 @@ const RISK_LABEL: Record<RiskLevel, string> = {
   CRITICAL: '심각',
 };
 
+const PRIORITY_LABEL: Record<string, string> = Object.fromEntries(PRIORITIES.map((p) => [p.key, p.label]));
+const STORAGE_KEY = 'cath.priorities';
+
 export default function App() {
+  const [priorities, setPriorities] = useState<string[] | null>(() => {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as string[]) : null;
+  });
+
+  if (!priorities) {
+    return (
+      <Onboarding
+        onComplete={(sel) => {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(sel));
+          setPriorities(sel);
+        }}
+      />
+    );
+  }
+
+  return <Dashboard priorities={priorities} />;
+}
+
+function Dashboard({ priorities }: { priorities: string[] }) {
   const { forecast, plan, planApproved, accounts, policy, recentTx, fireEvent, approvePlan, reset } = useCath();
   const totalAssets = accounts.reduce((s, a) => s + a.balance, 0);
   const safe = forecast.riskLevel === 'LOW';
@@ -20,7 +45,9 @@ export default function App() {
       <header className="topbar">
         <div>
           <div className="brand">Cath · Cash + Path</div>
-          <div className="tagline">돈이 필요한 곳으로, 알아서 흐르도록.</div>
+          <div className="tagline">
+            {priorities.map((k) => PRIORITY_LABEL[k]).join(' · ') || '돈이 필요한 곳으로, 알아서 흐르도록.'}
+          </div>
         </div>
         <span className={`badge ${safe ? 'ok' : 'warn'}`}>{RISK_LABEL[forecast.riskLevel]}</span>
       </header>

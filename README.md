@@ -8,9 +8,9 @@
 
 ## 데모
 
-| ① 대시보드 (안전) | ② 돌발 지출 → 위험 감지 + 제안 | ③ 승인 → 위험 해소 |
-|---|---|---|
-| ![대시보드](docs/screenshots/01-dashboard.png) | ![위험 감지](docs/screenshots/02-risk.png) | ![해소](docs/screenshots/03-resolved.png) |
+| ⓪ 온보딩 | ① 대시보드 (안전) | ② 돌발 지출 → 위험 + 제안 | ③ 승인 → 해소 |
+|---|---|---|---|
+| ![온보딩](docs/screenshots/00-onboarding.png) | ![대시보드](docs/screenshots/01-dashboard.png) | ![위험 감지](docs/screenshots/02-risk.png) | ![해소](docs/screenshots/03-resolved.png) |
 
 하단 데모 바에서 `노트북 구매 -₩1,290,000`을 누르면 → Cath가 현금흐름을 재계산해 위험을 감지하고 → 부족액만큼 자금 재배치를 제안 → 승인 시 위험이 해소된다. 이 흐름 전체가 백엔드 호출 없이 클라이언트 순수 함수(`src/domain/engine.ts`)로만 돌아간다 (기획서 §15).
 
@@ -39,6 +39,7 @@ src/
     format.ts    # 원화 포맷
   store.ts       # 앱 상태 훅 (이벤트 → 재계산)
   components/
+    Onboarding.tsx     # 온보딩 — 금융 목표 선택 (localStorage 저장)
     CashflowChart.tsx  # 인라인 SVG 그래프 (차트 라이브러리 미사용)
   App.tsx
 docs/
@@ -58,4 +59,5 @@ Vite · React 18 · TypeScript · Vitest. 런타임 의존성은 React뿐.
 ## 남은 확장 지점
 
 - 최적화 엔진은 **결제 불능 방지(유동성 확보)** 만 구현. 비상자금·부채 상환·저축/투자 배분(기획서 §8 3~6번)은 백엔드 몫.
-- 온보딩, 정책 편집 화면, 자동화 L3(자동 실행)는 미구현.
+- 온보딩에서 고른 목표는 현재 표시용. §8 우선순위 가중치로 엔진에 반영하는 건 확장 지점.
+- 정책 편집 화면, 자동화 L3(자동 실행)는 미구현.
