@@ -1,0 +1,25 @@
+{
+  "name": "doneureum",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "도느름(DONEUREUM) — 미래 현금흐름 기반 개인 금융 자동화 데모 (프론트엔드)",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.8"
+  }
+}
