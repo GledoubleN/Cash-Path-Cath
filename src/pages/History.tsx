@@ -50,10 +50,13 @@ export function History({ cath }: { cath: Cath }) {
           <Chip className="demobar-btns">
             {DEMO_EVENTS.map((e) => (
               <ChipItem key={e.key} className="chip" onClick={() => fireEvent(e)}>
-                {e.label} {signedWon(e.amount)}
+                <span className="chip-content">
+                  <span>{e.label}</span>
+                  <strong>{signedWon(e.amount)}</strong>
+                </span>
               </ChipItem>
             ))}
-            <ChipItem className="chip ghost" left={<ArrowCounterClockwise size={15} aria-hidden="true" />} onClick={reset}>초기화</ChipItem>
+            <ChipItem className="chip ghost" left={<ArrowCounterClockwise size={12} aria-hidden="true" />} onClick={reset}>초기화</ChipItem>
           </Chip>
         </div>
       </section>

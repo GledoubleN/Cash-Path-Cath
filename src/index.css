@@ -208,7 +208,7 @@ button { cursor: pointer; }
   border-radius: 9px;
   background: #edf3ff;
   color: #3b6ef5;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
 }
 
@@ -328,19 +328,40 @@ h3.sub { margin: 0 0 8px; color: var(--ink); font-size: 14px; }
 .chip {
   width: 100% !important;
   min-width: 0 !important;
-  min-height: 44px;
+  min-height: 40px;
   justify-content: center !important;
-  padding: 8px 7px;
+  padding: 0;
   border: 1px solid var(--line);
   border-radius: 999px;
   background: #fff;
   color: #4e5968;
-  font-size: 10.5px;
-  line-height: 1.3;
+  font-size: 10px;
+  line-height: 1.2;
   font-weight: 600;
   text-align: center;
   white-space: normal !important;
 }
+.chip [data-tds-mobile-component='ChipItem'] {
+  --chip-font-size: 11px !important;
+  --chip-min-width: 0px !important;
+  --chip-min-height: 38px !important;
+  --chip-padding-left: 6px !important;
+  --chip-padding-right: 6px !important;
+  width: 100%;
+  min-width: 0;
+  padding: 5px 6px !important;
+}
+.chip-content {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  white-space: nowrap;
+  font-size: 11px;
+  letter-spacing: -0.25px;
+}
+.chip-content strong { font-size: 10.5px; font-weight: 700; }
 .chip.ghost { color: var(--muted); }
 
 .notices { margin: 0; padding: 0; list-style: none; }
