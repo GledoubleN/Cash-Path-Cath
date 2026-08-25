@@ -1,7 +1,7 @@
 // 홈 — 기획서 화면 ① 대시보드 (Figma R_HOME_DONUT). 히어로 + 위험 배너 + 돈 관리 기준.
 import { BudgetDonut } from '../components/BudgetDonut';
 import type { FundAllocation } from '../components/PolicySetupFlow';
-import { won } from '../domain/format';
+import { signedWon, won } from '../domain/format';
 import type { Cath } from '../store';
 import { TextButton } from '@toss/tds-mobile';
 import { Warning } from '@phosphor-icons/react';
@@ -19,8 +19,18 @@ function readAllocation(): FundAllocation {
   return DEFAULT_ALLOCATION;
 }
 
-export function Home({ cath, onFix, onEditPolicy }: { cath: Cath; onFix: () => void; onEditPolicy: () => void }) {
-  const { forecast, plan, accounts, policy } = cath;
+export function Home({
+  cath,
+  onFix,
+  onEditPolicy,
+  onViewHistory,
+}: {
+  cath: Cath;
+  onFix: () => void;
+  onEditPolicy: () => void;
+  onViewHistory: () => void;
+}) {
+  const { forecast, plan, accounts, policy, recentTx } = cath;
   const totalAssets = accounts.reduce((s, a) => s + a.balance, 0);
   const available = forecast.availableCash;
 
@@ -64,6 +74,29 @@ export function Home({ cath, onFix, onEditPolicy }: { cath: Cath; onFix: () => v
         </div>
         <BudgetDonut allocation={readAllocation()} availableCash={available} />
         <p className="budget-note">안전자금을 제외한 여유자금 {won(available)} 기준</p>
+      </section>
+
+      <section className="card recent-card">
+        <div className="card-head">
+          <h2>최근 거래 내역</h2>
+          <TextButton className="link" size="small" color="#3182f6" fontWeight="semibold" onClick={onViewHistory}>
+            전체보기
+          </TextButton>
+        </div>
+        <ul className="recent-list">
+          {recentTx.slice(0, 4).map((transaction) => (
+            <li key={transaction.id}>
+              <span className={`recent-icon ${transaction.amount > 0 ? 'income' : 'expense'}`} aria-hidden="true">
+                {transaction.amount > 0 ? '↓' : '↑'}
+              </span>
+              <span className="recent-copy">
+                <strong>{transaction.title}</strong>
+                <small>{transaction.occurredAt.slice(5, 10).replace('-', '.')}</small>
+              </span>
+              <strong className={transaction.amount > 0 ? 'pos' : 'neg'}>{signedWon(transaction.amount)}</strong>
+            </li>
+          ))}
+        </ul>
       </section>
 
     </>

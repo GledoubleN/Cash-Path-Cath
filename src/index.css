@@ -220,6 +220,35 @@ button { cursor: pointer; }
   font-weight: 600;
 }
 
+.recent-card { padding-bottom: 12px; }
+.recent-card .card-head { margin-bottom: 4px; }
+.recent-list { margin: 0; padding: 0; list-style: none; }
+.recent-list li {
+  min-height: 68px;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #f2f4f6;
+}
+.recent-list li:last-child { border-bottom: 0; }
+.recent-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 15px;
+  background: #fff0f1;
+  color: var(--danger);
+  font-size: 19px;
+  font-weight: 700;
+}
+.recent-icon.income { color: var(--brand); background: #edf4ff; }
+.recent-copy { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.recent-copy strong { overflow: hidden; color: var(--ink); font-size: 14px; text-overflow: ellipsis; white-space: nowrap; }
+.recent-copy small { color: var(--muted); font-size: 11px; }
+.recent-list > li > strong { font-size: 14px; white-space: nowrap; }
+
 .chart { display: block; width: 100%; height: auto; margin-top: 4px; }
 .chart-floor { stroke: #b0b8c1; stroke-width: 1; stroke-dasharray: 5 5; }
 .chart-floor-label, .chart-x { fill: var(--muted); font-size: 10px; }

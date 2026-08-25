@@ -21,7 +21,17 @@
 .policy-setup-header { padding: 17px 20px 0; min-height: 82px; }
 .policy-setup-time { display: block; color: #666e7a; font-size: 11px; font-weight: 600; }
 .policy-setup-progress { display: flex; align-items: center; gap: 8px; margin-top: 18px; color: #666e7a; font-size: 11px; font-weight: 600; }
-.policy-setup-back { width: 22px; padding: 0; background: transparent; color: #666e7a; font-size: 22px; line-height: 1; }
+.policy-setup-back {
+  width: 22px;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  appearance: none;
+  background: transparent;
+  color: #666e7a;
+  font-size: 22px;
+  line-height: 1;
+}
 .policy-step { position: absolute; inset: 82px 18px 24px; }
 .policy-step-title-block { margin: 8px 2px 28px; }
 .policy-step-title-block.intro-title { margin: -8px 2px 22px; }
