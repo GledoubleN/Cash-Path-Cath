@@ -71,7 +71,7 @@ function Shell({ route, navigate }: { route: Route | null; navigate: (r: Route) 
           <div className="tagline">{header.description}</div>
         </div>
         <Badge className={`status-badge ${isHome || safe ? 'status-ok' : 'status-risk'}`} size="small" variant="weak" color={isHome || safe ? 'green' : 'red'}>
-          {isHome ? '연결 정상' : RISK_LABEL[cath.forecast.riskLevel]}
+          {isHome ? '연결' : RISK_LABEL[cath.forecast.riskLevel]}
         </Badge>
       </header>
 
