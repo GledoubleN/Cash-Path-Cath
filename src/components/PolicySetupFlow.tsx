@@ -96,7 +96,7 @@ function IntroStep({ connectedSummary, onNext }: { connectedSummary: string; onN
   return (
     <div className="policy-step">
       <div className="policy-step-title-block intro-title">
-        <h1>카쓰가 내 돈을 관리하는 법</h1>
+        <h1>Cath가 내 돈을 관리하는 법</h1>
         <p>앞으로 쓸 수 있는 돈과 안전하게 운용할 금액을 구분해요.</p>
         <span className="policy-pill">첫 설정 · 약 2분</span>
       </div>
@@ -142,7 +142,7 @@ function SafetyStep({
         description="현재 ₩2,100,000 · 목표까지의 금액을 우선 채워요."
         onChange={(emergencyFund) => setDraft((current) => ({ ...current, emergencyFund }))}
       />
-      <p className="policy-note">카쓰는 예정 지출과 위 두 안전자금을 먼저 확보한 뒤, 남는 돈만 운용합니다.</p>
+      <p className="policy-note">Cath는 예정 지출과 위 두 안전자금을 먼저 확보한 뒤, 남는 돈만 운용합니다.</p>
       <BottomButton onClick={onNext}>다음 · 대출 처리 계획</BottomButton>
     </div>
   );

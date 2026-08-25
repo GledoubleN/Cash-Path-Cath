@@ -55,14 +55,14 @@ function Shell({ route, navigate }: { route: Route | null; navigate: (r: Route) 
     <div className="app">
       <header className="topbar">
         <div>
-          <div className="brand">Cath · Cash + Path</div>
-          <div className="tagline">돈이 필요한 곳으로, 알아서 흐르도록.</div>
+          <div className="brand">Cath</div>
+          <div className="tagline"></div>
         </div>
         <span className={`badge ${safe ? 'ok' : 'warn'}`}>{RISK_LABEL[cath.forecast.riskLevel]}</span>
       </header>
 
       <main className="page">
-        {tab === 'home' && <Home cath={cath} onFix={toOptimize} />}
+        {tab === 'home' && <Home cath={cath} onFix={toOptimize} onEditPolicy={() => navigate('setup')} />}
         {tab === 'forecast' && <Forecast cath={cath} onFix={toOptimize} />}
         {tab === 'optimize' && <Optimize cath={cath} />}
         {tab === 'history' && <History cath={cath} />}

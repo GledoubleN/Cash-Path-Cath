@@ -25,7 +25,7 @@ export const transactions: Transaction[] = [
   { id: 'tx-1', accountId: CHECKING_ID, title: '급여 입금', category: 'SALARY', amount: 3_200_000, occurredAt: '2026-08-23T09:15:00' },
   { id: 'tx-2', accountId: 'acc-etf', title: '카드 결제', category: 'CARD', amount: -1_100_000, occurredAt: '2026-08-23T08:45:00' },
   { id: 'tx-3', accountId: CHECKING_ID, title: '월세', category: 'RENT', amount: -700_000, occurredAt: '2026-08-23T08:30:00' },
-  { id: 'tx-4', accountId: CHECKING_ID, title: '식비', category: 'FOOD', amount: -38_000, occurredAt: '2026-08-27T12:10:00' },
+  { id: 'tx-4', accountId: CHECKING_ID, title: '식비', category: 'FOOD', amount: -38_000, occurredAt: '2026-08-23T12:10:00' },
 ];
 
 // 앞으로 30일 예정 현금 이벤트 (기획서 §6.2 / 화면 ③ 예정 지출).
