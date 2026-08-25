@@ -3,7 +3,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import { buildForecast, optimize, totalInjection, type ForecastInput } from './domain/engine';
 import { CHECKING_ID, accounts, pendingAutoInvest, policy, scheduledEvents, transactions } from './domain/mock';
-import type { Transaction } from './domain/types';
+import type { OptimizationPlan, Transaction } from './domain/types';
 
 const checking = accounts.find((a) => a.id === CHECKING_ID)!;
 const cma = accounts.find((a) => a.type === 'CMA')!;
@@ -27,6 +27,7 @@ export function useCath() {
   const [applied, setApplied] = useState<Transaction[]>([]);
   const [injection, setInjection] = useState(0);
   const [planApproved, setPlanApproved] = useState(false);
+  const [approvedPlan, setApprovedPlan] = useState<OptimizationPlan | null>(null); // 실행 내역 표시용
 
   const base: ForecastInput = useMemo(
     () => ({
@@ -66,6 +67,7 @@ export function useCath() {
   const approvePlan = useCallback(() => {
     if (!plan) return;
     setInjection((prev) => prev + totalInjection(plan));
+    setApprovedPlan(plan);
     setPlanApproved(true);
   }, [plan]);
 
@@ -73,6 +75,7 @@ export function useCath() {
     setApplied([]);
     setInjection(0);
     setPlanApproved(false);
+    setApprovedPlan(null);
   }, []);
 
   const recentTx = useMemo<Transaction[]>(
@@ -80,5 +83,7 @@ export function useCath() {
     [applied],
   );
 
-  return { forecast, plan, planApproved, accounts, policy, recentTx, fireEvent, approvePlan, reset };
+  return { forecast, plan, planApproved, approvedPlan, accounts, policy, recentTx, scheduledEvents, fireEvent, approvePlan, reset };
 }
+
+export type Cath = ReturnType<typeof useCath>;
