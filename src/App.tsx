@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { PolicySetupFlow } from './components/PolicySetupFlow';
 import { TabBar, type TabKey } from './components/TabBar';
 import { Alerts, type Notice } from './pages/Alerts';
@@ -18,15 +18,13 @@ const DRAFT_KEY = 'cath.policyDraft';
 
 export default function App() {
   const [route, navigate] = useRoute();
-  const [onboarded, setOnboarded] = useState(() => !!localStorage.getItem(DRAFT_KEY));
 
-  // setup(=온보딩) 명시 진입, 또는 설정 미완료 시 게이트로 설정 화면 표시
-  if (route === 'setup' || !onboarded) {
+  // 해시 없는 기본 진입(=온보딩) 또는 #/setup → 항상 설정 화면부터 표시
+  if (route === null || route === 'setup') {
     return (
       <PolicySetupFlow
         onComplete={(draft) => {
           localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
-          setOnboarded(true);
           navigate('home');
         }}
       />
