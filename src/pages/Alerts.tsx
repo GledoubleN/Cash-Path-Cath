@@ -6,7 +6,7 @@ export interface Notice {
   body: string;
 }
 
-const ICON: Record<Notice['tone'], string> = { warn: '!', ok: '✓', info: '₩' };
+const ICON: Record<Notice['tone'], Icon> = { warn: WarningCircle, ok: CheckCircle, info: BellSimple };
 
 export function Alerts({ notices }: { notices: Notice[] }) {
   if (notices.length === 0) {
@@ -21,16 +21,20 @@ export function Alerts({ notices }: { notices: Notice[] }) {
     <section className="card">
       <h2>알림</h2>
       <ul className="notices">
-        {notices.map((n) => (
+        {notices.map((n) => {
+          const NoticeIcon = ICON[n.tone];
+          return (
           <li key={n.id} className={`notice ${n.tone}`}>
-            <span className="notice-icon">{ICON[n.tone]}</span>
+            <span className="notice-icon"><NoticeIcon size={19} weight="fill" aria-hidden="true" /></span>
             <span>
               <strong>{n.title}</strong>
               <em className="muted">{n.body}</em>
             </span>
           </li>
-        ))}
+          );
+        })}
       </ul>
     </section>
   );
 }
+import { BellSimple, CheckCircle, WarningCircle, type Icon } from '@phosphor-icons/react';

@@ -17,11 +17,11 @@ const TAB_KEYS: TabKey[] = ['home', 'forecast', 'optimize', 'history', 'alerts']
 const RISK_LABEL: Record<RiskLevel, string> = { LOW: '안전', MEDIUM: '주의', HIGH: '위험', CRITICAL: '심각' };
 const DRAFT_KEY = 'cath.policyDraft';
 const TAB_COPY: Record<TabKey, { title: string; description: string }> = {
-  home: { title: '카쓰', description: '오늘의 돈 관리' },
-  forecast: { title: 'Cath · Cash + Path', description: '앞으로의 현금흐름을 미리 확인해요' },
-  optimize: { title: 'Cath · Cash + Path', description: '돈이 필요한 곳으로, 알아서 흐르도록' },
-  history: { title: 'Cath · Cash + Path', description: '내 돈의 흐름을 한눈에 확인해요' },
-  alerts: { title: 'Cath · Cash + Path', description: '놓치면 안 되는 변화를 알려드려요' },
+  home: { title: 'Cath', description: '오늘의 돈 관리' },
+  forecast: { title: 'Cath', description: '앞으로의 현금흐름을 미리 확인해요' },
+  optimize: { title: 'Cath', description: '돈이 필요한 곳으로, 알아서 흐르도록' },
+  history: { title: 'Cath', description: '내 돈의 흐름을 한눈에 확인해요' },
+  alerts: { title: 'Cath', description: '놓치면 안 되는 변화를 알려드려요' },
 };
 
 export default function App() {
@@ -45,6 +45,7 @@ function Shell({ route, navigate }: { route: Route | null; navigate: (r: Route) 
   const cath = useCath();
   const tab: TabKey = TAB_KEYS.includes(route as TabKey) ? (route as TabKey) : 'home';
   const safe = cath.forecast.riskLevel === 'LOW';
+  const isHome = tab === 'home';
   const header = TAB_COPY[tab];
 
   const notices = useMemo<Notice[]>(() => {
@@ -68,8 +69,8 @@ function Shell({ route, navigate }: { route: Route | null; navigate: (r: Route) 
           <div className="brand">{header.title}</div>
           <div className="tagline">{header.description}</div>
         </div>
-        <Badge size="small" variant="weak" color={safe ? 'green' : 'red'}>
-          {safe && tab === 'home' ? '연결 정상' : RISK_LABEL[cath.forecast.riskLevel]}
+        <Badge className={`status-badge ${isHome || safe ? 'status-ok' : 'status-risk'}`} size="small" variant="weak" color={isHome || safe ? 'green' : 'red'}>
+          {isHome ? '연결 정상' : RISK_LABEL[cath.forecast.riskLevel]}
         </Badge>
       </header>
 

@@ -3,6 +3,8 @@ import { BudgetDonut } from '../components/BudgetDonut';
 import type { FundAllocation } from '../components/PolicySetupFlow';
 import { won } from '../domain/format';
 import type { Cath } from '../store';
+import { TextButton } from '@toss/tds-mobile';
+import { Warning } from '@phosphor-icons/react';
 
 const DEFAULT_ALLOCATION: FundAllocation = { living: 40, emergency: 20, saving: 20, investment: 20 };
 
@@ -49,16 +51,16 @@ export function Home({ cath, onFix, onEditPolicy }: { cath: Cath; onFix: () => v
 
       {plan && (
         <section className="card banner home-risk">
-          <h2>⚠ 12일 뒤 안전자금 아래로 내려가요</h2>
+          <h2><Warning size={18} weight="fill" aria-hidden="true" />12일 뒤 안전자금 아래로 내려가요</h2>
           <p>예상 최저잔액 {won(forecast.minimumExpectedBalance)} · 기준보다 {won(Math.abs(plan.shortfall))} 부족</p>
-          <button className="banner-link" onClick={onFix}>조정안 확인하기</button>
+          <button type="button" className="banner-link" onClick={onFix}>조정안 확인하기</button>
         </section>
       )}
 
       <section className="card">
         <div className="card-head">
           <h2>돈 관리 기준</h2>
-          <button className="link" onClick={onEditPolicy}>설정 수정</button>
+          <TextButton className="link" size="small" color="#3182f6" fontWeight="semibold" onClick={onEditPolicy}>설정 수정</TextButton>
         </div>
         <BudgetDonut allocation={readAllocation()} availableCash={available} />
         <p className="budget-note">안전자금을 제외한 여유자금 {won(available)} 기준</p>

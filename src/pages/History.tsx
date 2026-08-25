@@ -1,5 +1,7 @@
 // 내역 — 기획서 화면 ② 거래 내역. 데모 이벤트(가상 거래 생성)도 여기서 발생.
 import { useState } from 'react';
+import { Chip, ChipItem, SegmentedControl } from '@toss/tds-mobile';
+import { ArrowCounterClockwise } from '@phosphor-icons/react';
 import { signedWon } from '../domain/format';
 import { DEMO_EVENTS } from '../store';
 import type { Cath } from '../store';
@@ -21,13 +23,11 @@ export function History({ cath }: { cath: Cath }) {
 
   return (
     <>
-      <div className="segmented">
+      <SegmentedControl className="segmented" value={filter} onChange={(value) => setFilter(value as Filter)} size="large">
         {FILTERS.map((f) => (
-          <button key={f.key} className={filter === f.key ? 'on' : ''} onClick={() => setFilter(f.key)}>
-            {f.label}
-          </button>
+          <SegmentedControl.Item key={f.key} value={f.key}>{f.label}</SegmentedControl.Item>
         ))}
-      </div>
+      </SegmentedControl>
 
       <section className="card">
         <ul className="rows">
@@ -46,15 +46,15 @@ export function History({ cath }: { cath: Cath }) {
       <section className="card">
         <h2>+ 새 거래 추가 </h2>
         <p className="muted">버튼을 누르면 가상 거래가 발생하고 예측·위험·최적화가 즉시 재계산됩니다.</p>
-        <div className="demobar-btns">
-          {DEMO_EVENTS.map((e) => (
-            <button key={e.key} className="chip" onClick={() => fireEvent(e)}>
-              {e.label} {signedWon(e.amount)}
-            </button>
-          ))}
-          <button className="chip ghost" onClick={reset}>
-            ↺ 초기화
-          </button>
+        <div className="demobar-scroll">
+          <Chip className="demobar-btns">
+            {DEMO_EVENTS.map((e) => (
+              <ChipItem key={e.key} className="chip" onClick={() => fireEvent(e)}>
+                {e.label} {signedWon(e.amount)}
+              </ChipItem>
+            ))}
+            <ChipItem className="chip ghost" left={<ArrowCounterClockwise size={15} aria-hidden="true" />} onClick={reset}>초기화</ChipItem>
+          </Chip>
         </div>
       </section>
     </>

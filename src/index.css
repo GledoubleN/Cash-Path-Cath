@@ -25,6 +25,7 @@ body {
   background: var(--bg);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 button, input { font: inherit; }
@@ -40,8 +41,8 @@ button { cursor: pointer; }
 }
 
 .statusbar {
-  height: 43px;
-  padding: 20px 4px 0;
+  height: 38px;
+  padding: 16px 4px 0;
   font-size: 12px;
   line-height: 1;
   font-weight: 700;
@@ -49,12 +50,12 @@ button { cursor: pointer; }
 }
 
 .topbar {
-  min-height: 78px;
+  min-height: 75px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
-  padding: 11px 2px 14px;
+  padding: 10px 2px 14px;
 }
 
 .brand {
@@ -70,6 +71,17 @@ button { cursor: pointer; }
   font-size: 12px;
   line-height: 1.4;
 }
+
+.status-badge {
+  min-width: 0 !important;
+  padding: 5px 10px !important;
+  border-radius: 999px !important;
+  font-size: 11px !important;
+  line-height: 14px !important;
+  font-weight: 700 !important;
+}
+.status-badge.status-ok { color: #0ca678 !important; background: #e8f8ef !important; }
+.status-badge.status-risk { color: #e5484d !important; background: #fdebec !important; }
 
 .page { width: 100%; }
 
@@ -90,7 +102,7 @@ button { cursor: pointer; }
 }
 
 .hero {
-  padding: 21px 20px 20px;
+  padding: 18px 16px;
   color: #fff;
   background: linear-gradient(135deg, #3578f6 0%, #4e82f7 100%);
 }
@@ -116,22 +128,22 @@ button { cursor: pointer; }
 }
 
 .hero-grid > div { display: flex; flex-direction: column; gap: 3px; }
-.hero-grid span { font-size: 11px; color: rgba(255,255,255,.72); }
+.hero-grid span { font-size: 11px; line-height: 1.35; color: rgba(255,255,255,.72); }
 .hero-grid strong { font-size: 13px; line-height: 1.2; font-weight: 700; }
 
 .banner {
-  padding: 17px 16px 15px;
+  padding: 16px 14px 14px;
   border: 1px solid #ffc9ce;
   background: var(--danger-bg);
 }
 
-.banner h2 { margin-bottom: 5px; color: var(--danger); font-size: 14px; }
-.banner p { margin: 0; color: #8b6d70; font-size: 12px; line-height: 1.55; }
+.banner h2 { display: flex; align-items: center; gap: 5px; margin-bottom: 4px; color: var(--danger); font-size: 14px; line-height: 19px; }
+.banner p { margin: 0; color: #8b6d70; font-size: 12px; line-height: 17px; }
 
 .banner-link {
   width: 100%;
-  height: 31px;
-  margin-top: 11px;
+  height: 30px;
+  margin-top: 9px;
   border: 0;
   border-radius: 10px;
   color: var(--brand);
@@ -146,7 +158,7 @@ button { cursor: pointer; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
 .card-head h2 { margin: 0; }
@@ -185,7 +197,7 @@ button { cursor: pointer; }
 
 .budget-legend .dot { width: 8px; height: 8px; border-radius: 50%; }
 .budget-legend .lg-label { font-size: 12px; font-weight: 700; }
-.budget-legend .lg-pct { font-size: 12px; color: var(--brand); }
+.budget-legend .lg-pct { font-size: 12px; }
 .budget-legend .lg-amt { grid-column: 2 / 4; margin-top: 1px; color: var(--muted); font-size: 9px; }
 
 .budget-note {
@@ -297,7 +309,15 @@ h3.sub { margin: 0 0 8px; color: var(--ink); font-size: 14px; }
 
 .segmented button.on { color: var(--ink); background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
 
-.demobar-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 13px; }
+.demobar-scroll {
+  width: calc(100% + 4px);
+  margin-top: 13px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.demobar-scroll::-webkit-scrollbar { display: none; }
+.demobar-btns { width: max-content; max-width: none; padding-right: 16px; }
 .chip {
   min-height: 34px;
   padding: 7px 11px;
@@ -368,14 +388,14 @@ h3.sub { margin: 0 0 8px; color: var(--ink); font-size: 14px; }
 }
 
 .tab.on { color: var(--brand); }
-.tab-icon { position: relative; font-size: 17px; line-height: 1; font-weight: 700; }
+.tab-icon { position: relative; display: grid; place-items: center; line-height: 1; }
 .tab-label { font-size: 10px; font-weight: 600; }
 .tab-dot { position: absolute; top: -4px; right: -7px; width: 6px; height: 6px; border-radius: 50%; background: var(--danger); }
 
 @media (min-width: 391px) {
   body { padding: 18px 0; }
-  .app { min-height: calc(100vh - 36px); border-radius: 24px; box-shadow: 0 8px 40px rgba(0,0,0,.08); }
-  .tabbar { bottom: 18px; border-radius: 0 0 24px 24px; }
+  .app { position: relative; min-height: 844px; border-radius: 24px; box-shadow: 0 8px 40px rgba(0,0,0,.08); }
+  .tabbar { position: absolute; bottom: 0; border-radius: 0 0 24px 24px; }
 }
 
 @media (max-width: 350px) {

@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Button } from '@toss/tds-mobile';
+import { CaretLeft } from '@phosphor-icons/react';
 import './PolicySetupFlow.css';
 
 export interface FundAllocation {
@@ -69,7 +70,7 @@ export function PolicySetupFlow({
           <span className="policy-setup-time" aria-hidden="true">9:41</span>
           {step > 0 && (
             <div className="policy-setup-progress">
-              <button type="button" className="policy-setup-back" onClick={goBack} aria-label="이전 단계">‹</button>
+              <button type="button" className="policy-setup-back" onClick={goBack} aria-label="이전 단계"><CaretLeft size={19} weight="bold" /></button>
               <span>{step} / 4&nbsp;&nbsp;{STEP_LABELS[step]}</span>
             </div>
           )}
