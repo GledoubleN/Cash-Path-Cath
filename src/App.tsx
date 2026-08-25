@@ -76,7 +76,14 @@ function Shell({ route, navigate }: { route: Route | null; navigate: (r: Route) 
       </header>
 
       <main className="page">
-        {tab === 'home' && <Home cath={cath} onFix={toOptimize} onEditPolicy={() => navigate('setup')} />}
+        {tab === 'home' && (
+          <Home
+            cath={cath}
+            onFix={toOptimize}
+            onEditPolicy={() => navigate('setup')}
+            onViewHistory={() => navigate('history')}
+          />
+        )}
         {tab === 'forecast' && <Forecast cath={cath} onFix={toOptimize} />}
         {tab === 'optimize' && <Optimize cath={cath} />}
         {tab === 'history' && <History cath={cath} />}
