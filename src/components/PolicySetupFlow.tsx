@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Button } from '@toss/tds-mobile';
 import { CaretLeft } from '@phosphor-icons/react';
+import cathLogoLockup from '../assets/cath-logo-lockup.png';
 import './PolicySetupFlow.css';
 
 export interface FundAllocation {
@@ -98,6 +99,7 @@ function IntroStep({ connectedSummary, onNext }: { connectedSummary: string; onN
   return (
     <div className="policy-step">
       <div className="policy-step-title-block intro-title">
+        <img className="policy-logo-lockup" src={cathLogoLockup} alt="Cath, cash plus path" />
         <h1>Cath가 내 돈을 관리하는 법</h1>
         <p>앞으로 쓸 수 있는 돈과 안전하게 운용할 금액을 구분해요.</p>
         <span className="policy-pill">첫 설정 · 약 2분</span>

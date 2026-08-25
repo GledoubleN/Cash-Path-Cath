@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { Badge } from '@toss/tds-mobile';
+import cathLogoMark from './assets/cath-logo-mark.png';
 import { PolicySetupFlow } from './components/PolicySetupFlow';
 import { TabBar, type TabKey } from './components/TabBar';
 import { Alerts, type Notice } from './pages/Alerts';
@@ -16,12 +17,12 @@ const TAB_KEYS: TabKey[] = ['home', 'forecast', 'optimize', 'history', 'alerts']
 
 const RISK_LABEL: Record<RiskLevel, string> = { LOW: '안전', MEDIUM: '주의', HIGH: '위험', CRITICAL: '심각' };
 const DRAFT_KEY = 'cath.policyDraft';
-const TAB_COPY: Record<TabKey, { title: string; description: string }> = {
-  home: { title: 'Cath', description: '오늘의 돈 관리' },
-  forecast: { title: 'Cath', description: '앞으로의 현금흐름을 미리 확인해요' },
-  optimize: { title: 'Cath', description: '돈이 필요한 곳으로, 알아서 흐르도록' },
-  history: { title: 'Cath', description: '내 돈의 흐름을 한눈에 확인해요' },
-  alerts: { title: 'Cath', description: '놓치면 안 되는 변화를 알려드려요' },
+const TAB_COPY: Record<TabKey, { description: string }> = {
+  home: { description: '오늘의 돈 관리' },
+  forecast: { description: '앞으로의 현금흐름을 미리 확인해요' },
+  optimize: { description: '돈이 필요한 곳으로, 알아서 흐르도록' },
+  history: { description: '내 돈의 흐름을 한눈에 확인해요' },
+  alerts: { description: '놓치면 안 되는 변화를 알려드려요' },
 };
 
 export default function App() {
@@ -65,8 +66,8 @@ function Shell({ route, navigate }: { route: Route | null; navigate: (r: Route) 
     <div className="app">
       <div className="statusbar" aria-hidden="true">9:41</div>
       <header className="topbar">
-        <div>
-          <div className="brand">{header.title}</div>
+        <div className="header-identity">
+          <img className="header-logo" src={cathLogoMark} alt="Cath" />
           <div className="tagline">{header.description}</div>
         </div>
         <Badge className={`status-badge ${isHome || safe ? 'status-ok' : 'status-risk'}`} size="small" variant="weak" color={isHome || safe ? 'green' : 'red'}>
