@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Onboarding, PRIORITIES } from './components/Onboarding';
+import { PolicySetupFlow } from './components/PolicySetupFlow';
 import { TabBar, type TabKey } from './components/TabBar';
 import { Alerts, type Notice } from './pages/Alerts';
 import { Forecast } from './pages/Forecast';
@@ -15,10 +16,19 @@ const PRIORITY_LABEL: Record<string, string> = Object.fromEntries(PRIORITIES.map
 const STORAGE_KEY = 'cath.priorities';
 
 export default function App() {
+  const isPolicySetupPreview = new URLSearchParams(window.location.search).get('view') === 'policy-setup';
   const [priorities, setPriorities] = useState<string[] | null>(() => {
     const raw = localStorage.getItem(STORAGE_KEY);
     return raw ? (JSON.parse(raw) as string[]) : null;
   });
+
+  if (isPolicySetupPreview) {
+    return (
+      <PolicySetupFlow
+        onComplete={(draft) => localStorage.setItem('cath.policyDraft', JSON.stringify(draft))}
+      />
+    );
+  }
 
   if (!priorities) {
     return (
