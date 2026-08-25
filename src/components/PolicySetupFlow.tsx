@@ -290,5 +290,5 @@ function SummaryCard({ title, rows }: { title: string; rows: Array<[string, stri
 }
 
 function BottomButton({ children, onClick, disabled = false }: { children: React.ReactNode; onClick: () => void; disabled?: boolean }) {
-  return <Button type="button" display="full" size="large" color="dark" className="policy-bottom-button" onClick={onClick} disabled={disabled}>{children}</Button>;
+  return <Button type="button" display="full" size="large" className="policy-bottom-button" onClick={onClick} disabled={disabled}>{children}</Button>;
 }

@@ -22,7 +22,7 @@ export function RiskBanner({
         <strong>{won(Math.abs(plan.shortfall))}</strong>
       </div>
       {onFix && (
-        <Button className="banner-action" size="medium" display="full" variant="weak" color="danger" onClick={onFix}>
+        <Button className="banner-action" size="medium" display="full" onClick={onFix}>
           조정안 확인하기
         </Button>
       )}
