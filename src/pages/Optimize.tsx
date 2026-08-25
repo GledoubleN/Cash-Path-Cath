@@ -1,5 +1,6 @@
 // 최적화 — 기획서 화면 ④ 제안 · ⑤ 승인 · ⑥ 결과.
 import { useState } from 'react';
+import { Button, Checkbox } from '@toss/tds-mobile';
 import { signedWon, won } from '../domain/format';
 import type { Cath } from '../store';
 
@@ -68,13 +69,13 @@ export function Optimize({ cath }: { cath: Cath }) {
           </strong>
         </div>
 
-        <label className="agree">
-          <input type="checkbox" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} />
-          제안 내용을 확인했고 동의합니다.
-        </label>
-        <button className="primary" disabled={!agreed} onClick={approvePlan}>
+        <div className="agree">
+          <Checkbox.Circle checked={agreed} onCheckedChange={setAgreed} aria-label="제안 내용 동의" />
+          <span>제안 내용을 확인했고 동의합니다.</span>
+        </div>
+        <Button className="proposal-action" display="full" size="large" disabled={!agreed} onClick={approvePlan}>
           승인하고 실행하기
-        </button>
+        </Button>
       </section>
     );
   }
