@@ -339,6 +339,85 @@ button {
   font-weight: 700;
 }
 
+/* ── 홈 돈 관리 기준 (도넛) ── */
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.card-head h2 {
+  margin: 0;
+}
+.link {
+  background: none;
+  color: var(--brand);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0;
+}
+.budget {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.donut {
+  width: 132px;
+  height: 132px;
+  flex: none;
+}
+.donut-cap {
+  font-size: 9px;
+  fill: var(--muted);
+}
+.donut-pct {
+  font-size: 22px;
+  font-weight: 800;
+  fill: var(--ink);
+}
+.budget-legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.budget-legend li {
+  display: grid;
+  grid-template-columns: 10px 1fr auto;
+  column-gap: 8px;
+  align-items: center;
+}
+.budget-legend .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.budget-legend .lg-label {
+  font-size: 13px;
+  font-weight: 600;
+}
+.budget-legend .lg-pct {
+  font-size: 13px;
+  font-weight: 700;
+}
+.budget-legend .lg-amt {
+  grid-column: 2 / 4;
+  font-size: 11px;
+  color: var(--muted);
+}
+.budget-note {
+  margin: 16px 0 0;
+  background: #eef3ff;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+
 /* ── 최적화 제안 상세 ── */
 .summary-grid {
   display: grid;
