@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import { Onboarding, PRIORITIES } from './components/Onboarding';
 import { PolicySetupFlow } from './components/PolicySetupFlow';
 import { TabBar, type TabKey } from './components/TabBar';
 import { Alerts, type Notice } from './pages/Alerts';
@@ -15,40 +14,28 @@ import { useCath } from './store';
 const TAB_KEYS: TabKey[] = ['home', 'forecast', 'optimize', 'history', 'alerts'];
 
 const RISK_LABEL: Record<RiskLevel, string> = { LOW: '안전', MEDIUM: '주의', HIGH: '위험', CRITICAL: '심각' };
-const PRIORITY_LABEL: Record<string, string> = Object.fromEntries(PRIORITIES.map((p) => [p.key, p.label]));
-const STORAGE_KEY = 'cath.priorities';
+const DRAFT_KEY = 'cath.policyDraft';
 
 export default function App() {
   const [route, navigate] = useRoute();
-  const [priorities, setPriorities] = useState<string[] | null>(() => {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as string[]) : null;
-  });
+  const [onboarded, setOnboarded] = useState(() => !!localStorage.getItem(DRAFT_KEY));
 
-  if (route === 'setup') {
+  // setup(=온보딩) 명시 진입, 또는 설정 미완료 시 게이트로 설정 화면 표시
+  if (route === 'setup' || !onboarded) {
     return (
       <PolicySetupFlow
-        onComplete={(draft) => localStorage.setItem('cath.policyDraft', JSON.stringify(draft))}
-      />
-    );
-  }
-
-  // #/onboarding 명시 진입, 또는 우선순위 미설정 시 게이트로 온보딩 표시
-  if (route === 'onboarding' || !priorities) {
-    return (
-      <Onboarding
-        onComplete={(sel) => {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(sel));
-          setPriorities(sel);
-          navigate('setup');
+        onComplete={(draft) => {
+          localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+          setOnboarded(true);
+          navigate('home');
         }}
       />
     );
   }
-  return <Shell priorities={priorities} route={route} navigate={navigate} />;
+  return <Shell route={route} navigate={navigate} />;
 }
 
-function Shell({ priorities, route, navigate }: { priorities: string[]; route: Route | null; navigate: (r: Route) => void }) {
+function Shell({ route, navigate }: { route: Route | null; navigate: (r: Route) => void }) {
   const cath = useCath();
   const tab: TabKey = TAB_KEYS.includes(route as TabKey) ? (route as TabKey) : 'home';
   const safe = cath.forecast.riskLevel === 'LOW';
@@ -71,7 +58,7 @@ function Shell({ priorities, route, navigate }: { priorities: string[]; route: R
       <header className="topbar">
         <div>
           <div className="brand">Cath · Cash + Path</div>
-          <div className="tagline">{priorities.map((k) => PRIORITY_LABEL[k]).join(' · ') || '돈이 필요한 곳으로, 알아서 흐르도록.'}</div>
+          <div className="tagline">돈이 필요한 곳으로, 알아서 흐르도록.</div>
         </div>
         <span className={`badge ${safe ? 'ok' : 'warn'}`}>{RISK_LABEL[cath.forecast.riskLevel]}</span>
       </header>
