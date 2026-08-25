@@ -1,0 +1,68 @@
+.policy-setup-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: #eef1f5;
+  color: #1a1f29;
+}
+
+.policy-setup-phone {
+  position: relative;
+  width: min(390px, 100%);
+  height: 844px;
+  overflow: hidden;
+  border: 1px solid #e0e3e8;
+  border-radius: 28px;
+  background: #f5f7fa;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif;
+}
+
+.policy-setup-header { padding: 18px 24px 0; min-height: 72px; }
+.policy-setup-time { display: block; color: #666e7a; font-size: 11px; font-weight: 600; }
+.policy-setup-progress { display: flex; align-items: center; gap: 8px; margin-top: 18px; color: #666e7a; font-size: 11px; font-weight: 600; }
+.policy-setup-back { width: 22px; padding: 0; background: transparent; color: #666e7a; font-size: 22px; line-height: 1; }
+.policy-step { position: absolute; inset: 72px 24px 42px; }
+.policy-step-title-block { margin: 8px 0 28px; }
+.policy-step-title-block.intro-title { margin-top: 0; }
+.policy-step-title-block h1 { margin: 0; font-size: 25px; line-height: 1.48; letter-spacing: -0.04em; }
+.policy-step-title-block p { margin: 2px 0 0; color: #666e7a; font-size: 12px; line-height: 1.5; }
+.policy-pill { display: inline-block; margin-top: 12px; padding: 8px 12px; border-radius: 14px; background: #e9edf3; font-size: 11px; font-weight: 600; }
+
+.policy-card { margin-bottom: 14px; padding: 18px; border: 1px solid #e0e3e8; border-radius: 16px; background: #fff; box-shadow: none; }
+.policy-card.compact { padding: 16px 18px; }
+.policy-card h2 { margin: 0 0 14px; font-size: 14px; }
+.policy-card p, .policy-card small { margin: 0; }
+.policy-card > strong { display: block; margin-top: 14px; font-size: 13px; }
+.policy-muted, .policy-label, .policy-card small { color: #666e7a; font-size: 12px; }
+.policy-criteria ol { margin: 0; padding-left: 20px; color: #666e7a; font-size: 13px; line-height: 1.65; }
+.policy-note { padding: 14px 16px; border-radius: 14px; background: #e9edf3; color: #454c57; font-size: 11px; line-height: 1.5; }
+.policy-error { margin: 8px 0 0; color: #b42318; font-size: 11px; }
+
+.money-field label { display: grid; gap: 10px; }
+.money-input { display: flex; align-items: baseline; color: #1a1f29; font-size: 25px; font-weight: 600; }
+.money-input input { width: 100%; min-width: 0; padding: 0; border: 0; outline: 0; background: transparent; color: inherit; font: inherit; }
+.money-input input::-webkit-inner-spin-button { appearance: none; }
+.money-field small { display: block; margin-top: 6px; font-size: 11px; }
+.policy-inline-inputs { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 10px; font-size: 13px; font-weight: 600; }
+.policy-inline-inputs .money-input { width: 145px; font-size: 14px; }
+.number-input { display: inline-flex; align-items: center; gap: 2px; font-weight: 600; }
+.number-input input { width: 42px; padding: 2px; border: 0; border-bottom: 1px solid #c9ced6; background: transparent; font: inherit; font-weight: 600; text-align: right; }
+.policy-example { display: inline-block; margin-top: 10px !important; padding: 8px 10px; border-radius: 10px; background: #e9edf3; }
+.policy-priority { display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: 600; }
+
+.allocation-card { padding: 16px 18px 12px; }
+.allocation-card.invalid { border-color: #e4a7a7; }
+.allocation-row { display: block; margin-top: 11px; }
+.allocation-head, .allocation-meta { display: flex; justify-content: space-between; }
+.allocation-head { font-size: 12px; }
+.allocation-meta { margin-top: 5px; color: #666e7a; font-size: 11px; }
+.allocation-row input[type='range'] { width: 100%; height: 8px; margin: 8px 0 0; accent-color: #1a1f29; }
+
+.summary-card { padding: 16px 18px; }
+.summary-row { display: flex; justify-content: space-between; gap: 12px; margin-top: 10px; font-size: 12px; }
+.summary-row span { color: #666e7a; }
+.summary-row strong { max-width: 58%; text-align: right; }
+
+.policy-bottom-button { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 50px; border-radius: 14px; background: #1a1f29; color: #fff; font-size: 14px; font-weight: 600; }
+.policy-bottom-button:disabled { opacity: 0.4; cursor: not-allowed; }

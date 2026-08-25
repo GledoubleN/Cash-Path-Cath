@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { CashflowChart } from './components/CashflowChart';
 import { Onboarding, PRIORITIES } from './components/Onboarding';
+import { PolicySetupFlow } from './components/PolicySetupFlow';
 import { signedWon, won } from './domain/format';
 import type { OptimizationPlan, RiskLevel } from './domain/types';
 import { DEMO_EVENTS, useCath, type DemoEvent } from './store';
@@ -16,10 +17,20 @@ const PRIORITY_LABEL: Record<string, string> = Object.fromEntries(PRIORITIES.map
 const STORAGE_KEY = 'cath.priorities';
 
 export default function App() {
+  const isPolicySetupPreview = new URLSearchParams(window.location.search).get('view') === 'policy-setup';
   const [priorities, setPriorities] = useState<string[] | null>(() => {
     const raw = localStorage.getItem(STORAGE_KEY);
     return raw ? (JSON.parse(raw) as string[]) : null;
   });
+
+  // 기존 온보딩은 보존하고, Figma 기반 신규 흐름은 독립 미리보기 경로에서 확인한다.
+  if (isPolicySetupPreview) {
+    return (
+      <PolicySetupFlow
+        onComplete={(draft) => localStorage.setItem('cath.policyDraft', JSON.stringify(draft))}
+      />
+    );
+  }
 
   if (!priorities) {
     return (
