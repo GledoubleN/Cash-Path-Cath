@@ -40,7 +40,7 @@ export default function App() {
         onComplete={(sel) => {
           localStorage.setItem(STORAGE_KEY, JSON.stringify(sel));
           setPriorities(sel);
-          navigate('home');
+          navigate('setup');
         }}
       />
     );
