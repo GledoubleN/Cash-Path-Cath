@@ -8,11 +8,15 @@
 
 ## 데모
 
-| ⓪ 온보딩 | ① 대시보드 (안전) | ② 돌발 지출 → 위험 + 제안 | ③ 승인 → 해소 |
-|---|---|---|---|
-| ![온보딩](docs/screenshots/00-onboarding.png) | ![대시보드](docs/screenshots/01-dashboard.png) | ![위험 감지](docs/screenshots/02-risk.png) | ![해소](docs/screenshots/03-resolved.png) |
+하단 5개 탭(홈 · 예측 · 최적화 · 내역 · 알림)으로 구성.
 
-하단 데모 바에서 `노트북 구매 -₩1,290,000`을 누르면 → Cath가 현금흐름을 재계산해 위험을 감지하고 → 부족액만큼 자금 재배치를 제안 → 승인 시 위험이 해소된다. 이 흐름 전체가 백엔드 호출 없이 클라이언트 순수 함수(`src/domain/engine.ts`)로만 돌아간다 (기획서 §15).
+| ① 온보딩 | ② 홈 | ③ 예측 |
+|---|---|---|
+| ![온보딩](docs/screenshots/00-onboarding.png) | ![홈](docs/screenshots/01-home.png) | ![예측](docs/screenshots/02-forecast.png) |
+| ④ 내역 · 돌발 지출 | ⑤ 최적화 제안 | ⑥ 위험 해소 |
+| ![내역](docs/screenshots/03-history.png) | ![제안](docs/screenshots/04-optimize.png) | ![해소](docs/screenshots/05-resolved.png) |
+
+**내역** 탭에서 `노트북 구매 -₩1,290,000`을 누르면 → Cath가 현금흐름을 재계산해 위험을 감지하고(홈·예측·알림 배지 갱신) → **최적화** 탭에서 부족액만큼 자금 재배치를 제안 → 승인 시 위험이 해소된다. 이 흐름 전체가 백엔드 호출 없이 클라이언트 순수 함수(`src/domain/engine.ts`)로만 돌아간다 (기획서 §15).
 
 ## 이 저장소 범위
 
@@ -37,11 +41,19 @@ src/
     engine.ts    # 순수 계산: 현금흐름 예측 · 위험 판정 · 최적화
     engine.test.ts
     format.ts    # 원화 포맷
-  store.ts       # 앱 상태 훅 (이벤트 → 재계산)
+  store.ts       # 앱 상태 훅 (이벤트 → 재계산), 모든 탭이 공유
   components/
     Onboarding.tsx     # 온보딩 — 금융 목표 선택 (localStorage 저장)
+    TabBar.tsx         # 하단 5탭 네비 (라우터 없이 상태 전환)
+    RiskBanner.tsx     # 위험 배너 (홈·예측 공용)
     CashflowChart.tsx  # 인라인 SVG 그래프 (차트 라이브러리 미사용)
-  App.tsx
+  pages/
+    Home.tsx       # ① 대시보드
+    Forecast.tsx   # ③ 미래 현금흐름 + 예정 지출
+    Optimize.tsx   # ④⑤⑥ 제안 → 승인 → 결과
+    History.tsx    # ② 거래 내역 + 데모 이벤트
+    Alerts.tsx     # 알림
+  App.tsx          # 온보딩 게이트 + 탭 shell
 docs/
   ARCHITECTURE.md  # 서비스 흐름도 (Mermaid)
   ERD.md           # 데이터 모델 (Mermaid)
