@@ -44,7 +44,7 @@ export function History({ cath }: { cath: Cath }) {
       </section>
 
       <section className="card">
-        <h2>+ 새 거래 추가 (데모용)</h2>
+        <h2>+ 새 거래 추가 </h2>
         <p className="muted">버튼을 누르면 가상 거래가 발생하고 예측·위험·최적화가 즉시 재계산됩니다.</p>
         <div className="demobar-btns">
           {DEMO_EVENTS.map((e) => (
