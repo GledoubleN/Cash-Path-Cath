@@ -12,22 +12,22 @@
   width: min(390px, 100%);
   height: 844px;
   overflow: hidden;
-  border: 1px solid #e0e3e8;
-  border-radius: 28px;
-  background: #f7f8fa;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif;
+  border: 0;
+  border-radius: 32px;
+  background: #f2f4f6;
+  font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Pretendard', system-ui, sans-serif;
 }
 
-.policy-setup-header { padding: 18px 24px 0; min-height: 72px; }
+.policy-setup-header { padding: 17px 20px 0; min-height: 82px; }
 .policy-setup-time { display: block; color: #666e7a; font-size: 11px; font-weight: 600; }
 .policy-setup-progress { display: flex; align-items: center; gap: 8px; margin-top: 18px; color: #666e7a; font-size: 11px; font-weight: 600; }
 .policy-setup-back { width: 22px; padding: 0; background: transparent; color: #666e7a; font-size: 22px; line-height: 1; }
-.policy-step { position: absolute; inset: 72px 24px 42px; }
-.policy-step-title-block { margin: 8px 0 28px; }
-.policy-step-title-block.intro-title { margin: -8px 0 22px; }
-.policy-step-title-block h1 { margin: 0; font-size: 25px; line-height: 1.48; letter-spacing: -0.04em; }
+.policy-step { position: absolute; inset: 82px 18px 24px; }
+.policy-step-title-block { margin: 8px 2px 28px; }
+.policy-step-title-block.intro-title { margin: -8px 2px 22px; }
+.policy-step-title-block h1 { margin: 0; font-size: 27px; line-height: 1.38; letter-spacing: -0.045em; }
 .policy-step-title-block p { margin: 2px 0 0; color: #666e7a; font-size: 12px; line-height: 1.5; }
-.policy-pill { display: inline-block; margin-top: 12px; padding: 8px 12px; border-radius: 14px; background: #e9edf3; font-size: 11px; font-weight: 600; }
+.policy-pill { display: inline-block; margin-top: 14px; padding: 9px 13px; border-radius: 999px; background: #e5e8eb; color: #4e5968; font-size: 11px; font-weight: 600; }
 
 .policy-logo-lockup {
   display: block;
@@ -40,7 +40,7 @@
 .intro-title h1 { font-size: 26px; line-height: 1.35; }
 .intro-title p { margin-top: 7px; font-size: 13px; line-height: 1.55; }
 
-.policy-card { margin-bottom: 14px; padding: 18px; border: 1px solid #e0e3e8; border-radius: 16px; background: #fff; box-shadow: none; }
+.policy-card { margin-bottom: 16px; padding: 22px; border: 0; border-radius: 24px; background: #fff; box-shadow: none; }
 .intro-title + .policy-card,
 .intro-title + .policy-card + .policy-card {
   border: 0;
@@ -52,11 +52,11 @@
 .policy-card > strong { display: block; margin-top: 14px; font-size: 13px; }
 .policy-muted, .policy-label, .policy-card small { color: #666e7a; font-size: 12px; }
 .policy-criteria ol { margin: 0; padding-left: 20px; color: #666e7a; font-size: 13px; line-height: 1.65; }
-.policy-note { padding: 14px 16px; border-radius: 14px; background: #e9edf3; color: #454c57; font-size: 11px; line-height: 1.5; }
+.policy-note { padding: 15px 16px; border-radius: 16px; background: #e9ecef; color: #4e5968; font-size: 11px; line-height: 1.5; }
 .policy-error { margin: 8px 0 0; color: #b42318; font-size: 11px; }
 
 .money-field label { display: grid; gap: 10px; }
-.money-input { display: flex; align-items: baseline; color: #1a1f29; font-size: 25px; font-weight: 600; }
+.money-input { display: flex; align-items: baseline; color: #191f28; font-size: 28px; font-weight: 700; letter-spacing: -.04em; }
 .money-input input { width: 100%; min-width: 0; padding: 0; border: 0; outline: 0; background: transparent; color: inherit; font: inherit; }
 .money-input input::-webkit-inner-spin-button { appearance: none; }
 .money-field small { display: block; margin-top: 6px; font-size: 11px; }
@@ -73,14 +73,14 @@
 .allocation-head, .allocation-meta { display: flex; justify-content: space-between; }
 .allocation-head { font-size: 12px; }
 .allocation-meta { margin-top: 5px; color: #666e7a; font-size: 11px; }
-.allocation-row input[type='range'] { width: 100%; height: 8px; margin: 8px 0 0; accent-color: #1a1f29; }
+.allocation-row input[type='range'] { width: 100%; height: 8px; margin: 8px 0 0; accent-color: #3182f6; }
 
 .summary-card { padding: 16px 18px; }
 .summary-row { display: flex; justify-content: space-between; gap: 12px; margin-top: 10px; font-size: 12px; }
 .summary-row span { color: #666e7a; }
 .summary-row strong { max-width: 58%; text-align: right; }
 
-.policy-bottom-button { position: absolute !important; left: 0; right: 0; bottom: 0; width: 100%; height: 50px; border-radius: 14px !important; background: #191f28; color: #fff; font-size: 14px; font-weight: 600; }
+.policy-bottom-button { position: absolute !important; left: 0; right: 0; bottom: 0; width: 100%; height: 56px; border-radius: 16px !important; background: #3182f6 !important; color: #fff !important; font-size: 15px; font-weight: 700; }
 .policy-bottom-button:disabled { opacity: 0.4; cursor: not-allowed; }
 
 @media (max-width: 430px) {
