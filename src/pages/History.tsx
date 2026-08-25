@@ -49,7 +49,7 @@ export function History({ cath }: { cath: Cath }) {
         <div className="demobar-btns">
           {DEMO_EVENTS.map((e) => (
             <button key={e.key} className="chip" onClick={() => fireEvent(e)}>
-              {e.emoji} {e.label} {signedWon(e.amount)}
+              {e.label} {signedWon(e.amount)}
             </button>
           ))}
           <button className="chip ghost" onClick={reset}>

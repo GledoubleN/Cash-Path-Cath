@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { Button } from '@toss/tds-mobile';
 import './PolicySetupFlow.css';
 
 export interface FundAllocation {
@@ -286,5 +287,5 @@ function SummaryCard({ title, rows }: { title: string; rows: Array<[string, stri
 }
 
 function BottomButton({ children, onClick, disabled = false }: { children: React.ReactNode; onClick: () => void; disabled?: boolean }) {
-  return <button type="button" className="policy-bottom-button" onClick={onClick} disabled={disabled}>{children}</button>;
+  return <Button type="button" display="full" size="large" color="dark" className="policy-bottom-button" onClick={onClick} disabled={disabled}>{children}</Button>;
 }

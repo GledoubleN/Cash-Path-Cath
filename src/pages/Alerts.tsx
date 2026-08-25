@@ -6,7 +6,7 @@ export interface Notice {
   body: string;
 }
 
-const ICON: Record<Notice['tone'], string> = { warn: '⚠️', ok: '✅', info: '💸' };
+const ICON: Record<Notice['tone'], string> = { warn: '!', ok: '✓', info: '₩' };
 
 export function Alerts({ notices }: { notices: Notice[] }) {
   if (notices.length === 0) {

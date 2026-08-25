@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { Badge } from '@toss/tds-mobile';
 import { PolicySetupFlow } from './components/PolicySetupFlow';
 import { TabBar, type TabKey } from './components/TabBar';
 import { Alerts, type Notice } from './pages/Alerts';
@@ -15,6 +16,13 @@ const TAB_KEYS: TabKey[] = ['home', 'forecast', 'optimize', 'history', 'alerts']
 
 const RISK_LABEL: Record<RiskLevel, string> = { LOW: '안전', MEDIUM: '주의', HIGH: '위험', CRITICAL: '심각' };
 const DRAFT_KEY = 'cath.policyDraft';
+const TAB_COPY: Record<TabKey, { title: string; description: string }> = {
+  home: { title: '카쓰', description: '오늘의 돈 관리' },
+  forecast: { title: 'Cath · Cash + Path', description: '앞으로의 현금흐름을 미리 확인해요' },
+  optimize: { title: 'Cath · Cash + Path', description: '돈이 필요한 곳으로, 알아서 흐르도록' },
+  history: { title: 'Cath · Cash + Path', description: '내 돈의 흐름을 한눈에 확인해요' },
+  alerts: { title: 'Cath · Cash + Path', description: '놓치면 안 되는 변화를 알려드려요' },
+};
 
 export default function App() {
   const [route, navigate] = useRoute();
@@ -37,13 +45,14 @@ function Shell({ route, navigate }: { route: Route | null; navigate: (r: Route) 
   const cath = useCath();
   const tab: TabKey = TAB_KEYS.includes(route as TabKey) ? (route as TabKey) : 'home';
   const safe = cath.forecast.riskLevel === 'LOW';
+  const header = TAB_COPY[tab];
 
   const notices = useMemo<Notice[]>(() => {
     const list: Notice[] = [];
     if (cath.planApproved)
       list.push({ id: 'resolved', tone: 'ok', title: '위험이 해소되었습니다', body: `예상 최저잔액 ${won(cath.forecast.minimumExpectedBalance)}` });
     if (cath.plan)
-      list.push({ id: 'risk', tone: 'warn', title: '유동성 부족 위험 감지', body: `예상 부족액 ${won(-cath.plan.shortfall)}` });
+      list.push({ id: 'risk', tone: 'warn', title: '유동성 부족 위험 감지', body: `예상 부족액 ${won(Math.abs(cath.plan.shortfall))}` });
     for (const t of cath.recentTx.filter((t) => t.id.startsWith('tx-demo')).slice(0, 4))
       list.push({ id: t.id, tone: 'info', title: `${t.title} ${signedWon(t.amount)}`, body: '가상 거래가 반영되었습니다' });
     return list;
@@ -53,12 +62,15 @@ function Shell({ route, navigate }: { route: Route | null; navigate: (r: Route) 
 
   return (
     <div className="app">
+      <div className="statusbar" aria-hidden="true">9:41</div>
       <header className="topbar">
         <div>
-          <div className="brand">Cath</div>
-          <div className="tagline"></div>
+          <div className="brand">{header.title}</div>
+          <div className="tagline">{header.description}</div>
         </div>
-        <span className={`badge ${safe ? 'ok' : 'warn'}`}>{RISK_LABEL[cath.forecast.riskLevel]}</span>
+        <Badge size="small" variant="weak" color={safe ? 'green' : 'red'}>
+          {safe && tab === 'home' ? '연결 정상' : RISK_LABEL[cath.forecast.riskLevel]}
+        </Badge>
       </header>
 
       <main className="page">
