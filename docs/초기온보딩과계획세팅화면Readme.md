@@ -17,10 +17,10 @@ npm run dev
 개발 서버 실행 후 아래 주소에서 확인할 수 있습니다.
 
 ```text
-http://localhost:5173/?view=policy-setup
+http://localhost:5173/#/setup
 ```
 
-기본 경로의 기존 온보딩은 유지됩니다. `view=policy-setup` 쿼리가 있을 때만 신규 금융정책 설정 화면이 표시됩니다.
+각 화면은 해시 URL로 직접 접근할 수 있습니다: 온보딩 `#/onboarding`, 금융정책 설정 `#/setup`. 우선순위 미설정 시 기본 진입 화면은 온보딩입니다.
 
 ## 관련 파일
 
@@ -34,7 +34,7 @@ src/
 
 - `PolicySetupFlow.tsx`: 단계 이동, 입력 상태, 유효성 검사 및 화면 구성
 - `PolicySetupFlow.css`: Figma 기반 390×844 모바일 레이아웃과 시각 스타일
-- `App.tsx`: `?view=policy-setup` 미리보기 진입점
+- `App.tsx`: `#/setup` 미리보기 진입점
 
 ## 공통 디자인 기준
 
@@ -205,7 +205,7 @@ interface PolicySetupFlowProps {
 
 개발 시 다음 사항을 확인합니다.
 
-- `?view=policy-setup`에서 기존 온보딩이 아닌 신규 첫 화면이 표시되는가
+- `#/setup`에서 기존 온보딩이 아닌 신규 첫 화면이 표시되는가
 - 첫 화면의 주요 버튼이 모바일 프레임 내부 하단에 고정되는가
 - 첫 화면에서 2단계로 정상 이동하는가
 - 최소 생활자금과 비상금 목표를 수정할 수 있는가

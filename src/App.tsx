@@ -9,20 +9,23 @@ import { Home } from './pages/Home';
 import { Optimize } from './pages/Optimize';
 import { signedWon, won } from './domain/format';
 import type { RiskLevel } from './domain/types';
+import { useRoute, type Route } from './route';
 import { useCath } from './store';
+
+const TAB_KEYS: TabKey[] = ['home', 'forecast', 'optimize', 'history', 'alerts'];
 
 const RISK_LABEL: Record<RiskLevel, string> = { LOW: '안전', MEDIUM: '주의', HIGH: '위험', CRITICAL: '심각' };
 const PRIORITY_LABEL: Record<string, string> = Object.fromEntries(PRIORITIES.map((p) => [p.key, p.label]));
 const STORAGE_KEY = 'cath.priorities';
 
 export default function App() {
-  const isPolicySetupPreview = new URLSearchParams(window.location.search).get('view') === 'policy-setup';
+  const [route, navigate] = useRoute();
   const [priorities, setPriorities] = useState<string[] | null>(() => {
     const raw = localStorage.getItem(STORAGE_KEY);
     return raw ? (JSON.parse(raw) as string[]) : null;
   });
 
-  if (isPolicySetupPreview) {
+  if (route === 'setup') {
     return (
       <PolicySetupFlow
         onComplete={(draft) => localStorage.setItem('cath.policyDraft', JSON.stringify(draft))}
@@ -30,22 +33,24 @@ export default function App() {
     );
   }
 
-  if (!priorities) {
+  // #/onboarding 명시 진입, 또는 우선순위 미설정 시 게이트로 온보딩 표시
+  if (route === 'onboarding' || !priorities) {
     return (
       <Onboarding
         onComplete={(sel) => {
           localStorage.setItem(STORAGE_KEY, JSON.stringify(sel));
           setPriorities(sel);
+          navigate('home');
         }}
       />
     );
   }
-  return <Shell priorities={priorities} />;
+  return <Shell priorities={priorities} route={route} navigate={navigate} />;
 }
 
-function Shell({ priorities }: { priorities: string[] }) {
+function Shell({ priorities, route, navigate }: { priorities: string[]; route: Route | null; navigate: (r: Route) => void }) {
   const cath = useCath();
-  const [tab, setTab] = useState<TabKey>('home');
+  const tab: TabKey = TAB_KEYS.includes(route as TabKey) ? (route as TabKey) : 'home';
   const safe = cath.forecast.riskLevel === 'LOW';
 
   const notices = useMemo<Notice[]>(() => {
@@ -59,7 +64,7 @@ function Shell({ priorities }: { priorities: string[] }) {
     return list;
   }, [cath.planApproved, cath.plan, cath.forecast, cath.recentTx]);
 
-  const toOptimize = () => setTab('optimize');
+  const toOptimize = () => navigate('optimize');
 
   return (
     <div className="app">
@@ -81,7 +86,7 @@ function Shell({ priorities }: { priorities: string[] }) {
 
       <TabBar
         active={tab}
-        onChange={setTab}
+        onChange={navigate}
         dots={{ optimize: !!cath.plan, alerts: notices.some((n) => n.tone === 'warn') }}
       />
     </div>
