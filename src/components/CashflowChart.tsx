@@ -37,10 +37,10 @@ export function CashflowChart({ forecast, minimumCash }: Props) {
         최소생활자금 {won(minimumCash)}
       </text>
 
-      <path d={line} fill="none" stroke={stroke} strokeWidth={2.5} strokeLinejoin="round" />
+      <path className="chart-balance-line" pathLength="1" d={line} fill="none" stroke={stroke} strokeWidth={2.5} strokeLinejoin="round" />
 
       {pts.map((p, i) => (
-        <g key={i}>
+        <g key={i} className="chart-point" style={{ animationDelay: `${360 + i * 80}ms` }}>
           <circle cx={x(i)} cy={y(p.balance)} r={i === minIdx ? 5 : 3.5} fill={i === minIdx ? stroke : 'var(--bg)'} stroke={stroke} strokeWidth={2} />
           <text x={x(i)} y={H - 12} className="chart-x" textAnchor="middle">
             {p.label}

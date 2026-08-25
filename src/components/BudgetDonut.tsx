@@ -1,4 +1,5 @@
 // 여유자금 배분 도넛 — Home '돈 관리 기준'. 차트 라이브러리 없이 SVG stroke-dasharray.
+import type { CSSProperties } from 'react';
 import { won } from '../domain/format';
 import type { FundAllocation } from './PolicySetupFlow';
 
@@ -18,15 +19,23 @@ export function BudgetDonut({ allocation, availableCash }: { allocation: FundAll
     <div className="budget">
       <svg className="donut" viewBox="0 0 140 140" role="img" aria-label="여유자금 배분 도넛 차트">
         <g transform="rotate(-90 70 70)">
-          {SEGMENTS.map((s) => {
+          {SEGMENTS.map((s, index) => {
             const len = (C * allocation[s.key]) / 100;
+            const circleStyle = {
+              '--segment-length': len,
+              '--segment-gap': C - len,
+              '--circumference': C,
+              '--segment-delay': `${index * 110}ms`,
+            } as CSSProperties;
             const seg = (
               <circle
                 key={s.key}
+                className="donut-segment"
                 cx="70" cy="70" r={r} fill="none"
                 stroke={s.color} strokeWidth="18"
                 strokeDasharray={`${len} ${C - len}`}
                 strokeDashoffset={-offset}
+                style={circleStyle}
               />
             );
             offset += len;
@@ -38,8 +47,8 @@ export function BudgetDonut({ allocation, availableCash }: { allocation: FundAll
       </svg>
 
       <ul className="budget-legend">
-        {SEGMENTS.map((s) => (
-          <li key={s.key}>
+        {SEGMENTS.map((s, index) => (
+          <li key={s.key} style={{ '--legend-delay': `${360 + index * 70}ms` } as CSSProperties}>
             <span className="dot" style={{ background: s.color }} />
             <span className="lg-label">{s.label}</span>
             <span className="lg-pct" style={{ color: s.color }}>{allocation[s.key]}%</span>
